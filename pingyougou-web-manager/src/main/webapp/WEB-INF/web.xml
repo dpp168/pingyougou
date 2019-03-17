@@ -36,7 +36,7 @@
 	</filter-mapping>
 	
 	<!--配置spring安全框架委派过滤器 delegatingFilterProxy 名称固定为 springSquerityFilterChain-->
-	<filter>
+	<!--<filter>
 		<filter-name>springSquerityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
@@ -44,5 +44,5 @@
 	<filter-mapping>
 		<filter-name>springSquerityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping>-->
 </web-app>
