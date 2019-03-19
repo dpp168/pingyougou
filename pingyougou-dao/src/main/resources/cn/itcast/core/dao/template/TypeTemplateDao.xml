@@ -213,4 +213,17 @@
       custom_attribute_items = #{customAttributeItems,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <!--
+    根据主键批量删除数据
+  -->
+  <delete id="deleteByPrimaryKeys" >
+    delete from tb_type_template
+    <where>
+      <foreach collection="array" open="id in (" separator="," item="id" close=")">
+        #{id}
+      </foreach>
+    </where>
+  </delete>
+
 </mapper>

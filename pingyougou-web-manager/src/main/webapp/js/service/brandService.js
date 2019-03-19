@@ -1,28 +1,42 @@
-app.service('brandService',function ($http) {
+// 定义服务层:
+app.service("brandService",function($http){
 
-    //条件查询
-    this.findByPage = function (pageNum,pageSize,searchMsg) {
-        return  $http.post("../brand/findByPage.do?pageNum="+pageNum+"&pageSize="+pageSize,searchMsg)
-    }
+	//查询所有
+	this.findAll = function(){
+		return $http.get("../brand/findAll.do");
+	}
 
-    //添加数据
-    this.add = function (entity) {
-        return $http.post("../brand/add.do",entity)
-    }
+	//无条件分页
+	this.findPage = function(page,rows){
+		return $http.get("../brand/findPage.do?pageNum="+page+"&pageSize="+rows);
+	}
 
-    //跟新数据
-    this.update = function (entity) {
-        return $http.post("../brand/updateByPrimikey.do",entity)
-    }
+	//添加
+	this.add = function(entity){
+		return $http.post("../brand/add.do",entity);
+	}
 
-    //回显品牌
-    this.findById = function (id) {
-        return $http.get("../brand/findById.do?id="+id)
-    }
+	//跟新
+	this.update=function(entity){
+		return $http.post("../brand/update.do",entity);
+	}
 
-    //删除品牌
-    this.dele = function (checkList) {
-        return $http.post("../brand/deleteByPrimaryKey.do",checkList)
-    }
+	//回显数据
+	this.findOne=function(id){
+		return $http.get("../brand/findOne.do?id="+id);
+	}
 
-})
+	//删除
+	this.dele = function(ids){
+		return $http.post("../brand/delete.do",ids);
+	}
+
+	//带条件查询分页
+	this.search = function(page,rows,searchEntity){
+		return $http.post("../brand/search.do?pageNum="+page+"&pageSize="+rows,searchEntity);
+	}
+	
+	this.selectOptionList = function(){
+		return $http.get("../brand/selectOptionList.do");
+	}
+});

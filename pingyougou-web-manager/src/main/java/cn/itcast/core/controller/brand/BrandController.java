@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/brand")
@@ -24,9 +25,15 @@ public class BrandController {
     }
 
 
+    //不带条件查询
+    @RequestMapping("/findPage")
+    public PageInfo<Brand> findPage1(@RequestParam("pageNum") int pageNum_, int pageSize){
+        return search(pageNum_,pageSize,new Brand());
+    }
+
     //品牌分页 可带条件
-    @RequestMapping("/findByPage")
-    public PageInfo<Brand> findByPage(@RequestParam("pageNum") int pageNum_, int pageSize,@RequestBody  Brand brand){
+    @RequestMapping("/search")
+    public PageInfo<Brand> search(@RequestParam("pageNum") int pageNum_, int pageSize,@RequestBody  Brand brand){
         return brandService.findByPage(pageNum_,pageSize,brand);
     }
 
@@ -45,15 +52,15 @@ public class BrandController {
 
     }
 
-    //根据id查询品牌
-    @RequestMapping("/findById")
-    public Brand findById(Long id){
+    //根据id查询品牌--》回显品牌
+    @RequestMapping("/findOne")
+    public Brand findOne(Long id){
         return brandService.findById(id);
     }
 
     //根据主键跟新品牌
-    @RequestMapping("/updateByPrimikey")
-    public Result updateBrandByPrimikey(@RequestBody Brand brand){
+    @RequestMapping("/update")
+    public Result update(@RequestBody Brand brand){
         try {
             brandService.updateByPrimikey(brand);
             return new Result(true,"更新成功");
@@ -64,8 +71,8 @@ public class BrandController {
     }
 
     //根据主键删除品牌
-    @RequestMapping("/deleteByPrimaryKey")
-    public Result deleteByPrimaryKey(@RequestBody  Long[] ids){
+    @RequestMapping("/delete")
+    public Result delete(@RequestBody  Long[] ids){
         if(ids != null && ids.length >0){
             try {
                 brandService.delteByPrimaryKey(ids);
@@ -77,5 +84,14 @@ public class BrandController {
         }
         return new Result(false,"请选择要删除的数据");
 
+    }
+
+    /**
+     * 查询所有品牌，供模板使用 json[{id:..,text:..},{}] select2 多选框使用
+     * @return
+     */
+    @RequestMapping("/selectOptionList.do")
+    public List<Map<String ,Object>> selectOptionList(){
+        return brandService.selectOptionList();
     }
 }

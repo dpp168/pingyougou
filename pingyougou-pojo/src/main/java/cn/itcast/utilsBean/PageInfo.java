@@ -6,11 +6,11 @@ import java.util.List;
 //简化pagehelper 封装内容，减少传输压力
 public class PageInfo<T> implements Serializable {
     private Long total;
-    private List<T> list;
+    private List<T> rows;
 
-    public PageInfo(Long total, List<T> list) {
+    public PageInfo(Long total, List<T> rows) {
         this.total = total;
-        this.list = list;
+        this.rows = rows;
     }
 
     public PageInfo() {
@@ -25,12 +25,12 @@ public class PageInfo<T> implements Serializable {
         this.total = total;
     }
 
-    public List<T> getList() {
-        return list;
+    public List<T> getRows() {
+        return rows;
     }
 
-    public void setList(List<T> list) {
-        this.list = list;
+    public void setRows(List<T> rows) {
+        this.rows = rows;
     }
 
 

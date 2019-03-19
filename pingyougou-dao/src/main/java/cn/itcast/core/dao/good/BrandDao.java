@@ -28,4 +28,7 @@ public interface BrandDao {
     int updateByPrimaryKeySelective(Brand record);
 
     int updateByPrimaryKey(Brand record);
+
+    //自定义根据主键删除数据
+    void deleteByPrimaryKeys(Long[] ids);
 }

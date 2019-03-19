@@ -28,4 +28,16 @@ public interface SpecificationOptionDao {
     int updateByPrimaryKeySelective(SpecificationOption record);
 
     int updateByPrimaryKey(SpecificationOption record);
+
+    /**
+     * 批量删除
+     * @param ids
+     */
+    void deleteByExamples(List<Long> ids);
+
+    /**
+     * 批量插入数据
+     * @param specificationOptionList
+     */
+    void insertSelectives(List<SpecificationOption> specificationOptionList);
 }

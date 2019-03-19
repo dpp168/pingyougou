@@ -4,30 +4,30 @@ import java.io.Serializable;
 
 public class Result implements Serializable {
 
-    private Boolean success;
-    private String msg;
+    private Boolean flag;
+    private String message;
 
     public Result() {
     }
 
-    public Result(Boolean success, String msg) {
-        this.success = success;
-        this.msg = msg;
+    public Result(Boolean flag, String message) {
+        this.flag = flag;
+        this.message = message;
     }
 
-    public Boolean getSuccess() {
-        return success;
+    public Boolean getFlag() {
+        return flag;
     }
 
-    public void setSuccess(Boolean success) {
-        this.success = success;
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

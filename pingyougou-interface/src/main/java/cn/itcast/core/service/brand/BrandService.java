@@ -4,6 +4,7 @@ import cn.itcast.core.pojo.good.Brand;
 import cn.itcast.utilsBean.PageInfo;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BrandService {
     List<Brand> findAll();
@@ -41,5 +42,9 @@ public interface BrandService {
      */
     void delteByPrimaryKey(Long[] ids);
 
-
+    /**
+     * 查询所有品牌
+     * @return
+     */
+    List<Map<String,Object>> selectOptionList();
 }

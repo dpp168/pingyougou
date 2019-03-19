@@ -28,4 +28,10 @@ public interface TypeTemplateDao {
     int updateByPrimaryKeySelective(TypeTemplate record);
 
     int updateByPrimaryKey(TypeTemplate record);
+
+    /**
+     * 根据主键批量删除数据
+     * @param id
+     */
+    void deleteByPrimaryKeys(Long[] id);
 }
