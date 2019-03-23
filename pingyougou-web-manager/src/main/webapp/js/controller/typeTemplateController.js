@@ -85,7 +85,12 @@ app.controller('typeTemplateController' ,function($scope,$controller,brandServic
 			}			
 		);
 	}
-    
+
+
+	/*
+	* 供新增数据使用
+	* */
+
 	$scope.brandList={data:[]}
 	// 查询关联的品牌信息:
 	$scope.findBrandList = function(){
@@ -101,7 +106,9 @@ app.controller('typeTemplateController' ,function($scope,$controller,brandServic
 			$scope.specList = {data:response};
 		});
 	}
-	
+
+
+
 	//给扩展属性添加行
 	$scope.entity={customAttributeItems:[]};
 	$scope.addTableRow = function(){

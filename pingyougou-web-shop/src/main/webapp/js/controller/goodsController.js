@@ -23,7 +23,10 @@ app.controller('goodsController' ,function($scope,$controller,$location,typeTemp
 	}
 	
 	//查询实体 
-	$scope.findOne=function(){	
+	$scope.findOne=function(){
+		// 从 goods 页面 -- 》 goods——editer 页面
+		// href="goods_edit.html#?id={{entity.id}}">修改</a>
+		//获取id 的值
 		var id = $location.search()['id'];
 		if(null == id){
 			return;
@@ -33,9 +36,11 @@ app.controller('goodsController' ,function($scope,$controller,$location,typeTemp
 				$scope.entity= response;	
 				
 				// 调用处理富文本编辑器：
+				//将查询回来的数据插入 编辑器中
 				editor.html($scope.entity.goodsDesc.introduction);
 				
 				// 处理图片列表，因为图片信息保存的是JSON的字符串，让前台识别为JSON格式对象
+				//只有json格式的对象才能 。属性
 				$scope.entity.goodsDesc.itemImages = JSON.parse( $scope.entity.goodsDesc.itemImages );
 				
 				// 处理扩展属性:
@@ -51,7 +56,8 @@ app.controller('goodsController' ,function($scope,$controller,$location,typeTemp
 			}
 		);				
 	}
-	
+
+
 	$scope.checkAttributeValue = function(specName,optionName){
 		var items = $scope.entity.goodsDesc.specificationItems;
 		var object = $scope.searchObjectByKey(items,"attributeName",specName);
@@ -128,6 +134,8 @@ app.controller('goodsController' ,function($scope,$controller,$location,typeTemp
 			}
 		});
 	}
+
+
 	
 	// 获得了image_entity的实体的数据{"color":"褐色","url":"http://192.168.209.132/group1/M00/00/00/wKjRhFn1bH2AZAatAACXQA462ec665.jpg"}
 	$scope.entity={goods:{},goodsDesc:{itemImages:[],specificationItems:[]}};
@@ -163,9 +171,15 @@ app.controller('goodsController' ,function($scope,$controller,$location,typeTemp
 	
 	// 查询模块ID
 	$scope.$watch("entity.goods.category3Id",function(newValue,oldValue){
-		itemCatService.findOne(newValue).success(function(response){
+		for(var i =0; i < $scope.itemCat3List.length;i++){
+			if($scope.itemCat3List[i].id == newValue){
+                $scope.entity.goods.typeTemplateId = $scope.itemCat3List[i].typeId;
+			}
+		}
+
+		/*itemCatService.findOne(newValue).success(function(response){
 			$scope.entity.goods.typeTemplateId = response.typeId;
-		});
+		});*/
 	});
 	
 	// 查询模板下的品牌列表:
@@ -177,7 +191,11 @@ app.controller('goodsController' ,function($scope,$controller,$location,typeTemp
 			$scope.typeTemplate.brandIds = JSON.parse( $scope.typeTemplate.brandIds );
 			
 			// 将扩展属性的字符串转成JSON
+			//获取get请求？后面的id 值  如未指定代表获取？后所有
+			//url=../itemCat/findOne.do#?id='+id
+			//TODO ok
 			if($location.search()['id'] == null){
+
 				$scope.entity.goodsDesc.customAttributeItems = JSON.parse( $scope.typeTemplate.customAttributeItems );
 			}
 			
@@ -188,7 +206,8 @@ app.controller('goodsController' ,function($scope,$controller,$location,typeTemp
 			$scope.specList = response;
 		});
 	});
-	
+
+
 	$scope.updateSpecAttribute = function($event,name,value){
 		// 调用封装的方法判断 勾选的名称是否存在:
 		var object = $scope.searchObjectByKey($scope.entity.goodsDesc.specificationItems,"attributeName",name);

@@ -14,7 +14,12 @@ app.controller("baseController",function($scope){
 		// $scope.findByPage($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
 		$scope.search($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
 	}
-	
+
+	//回选选中情况
+	$scope.ischecked = function (id) {
+		return $scope.selectIds.indexOf(id) >=0;
+    }
+
 	// 定义一个数组:
 	$scope.selectIds = [];
 	// 更新复选框：

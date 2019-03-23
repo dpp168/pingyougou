@@ -43,7 +43,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring/spring-Squerity.xml</param-value>
+		<param-value>classpath:spring/spring-squerity.xml</param-value>
 	</context-param>
 <!--	<filter>
 		<filter-name>springSquerityFilterChain</filter-name>

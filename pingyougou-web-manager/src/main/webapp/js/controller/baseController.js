@@ -31,10 +31,16 @@ app.controller("baseController",function($scope){
 		}
 		
 	}
+
+	//回显复选框选中的效果选中
+    $scope.ischecked=function(id){
+	    return $scope.selectIds.indexOf(id) >=0;
+    }
 	
 	// 定义方法：获取JSON字符串中的某个key对应值的集合
+	//用于展示数据 a,b,c.. 格式
 	$scope.jsonToString = function(jsonStr,key){
-		// 将字符串转成JSOn:
+		// 将JSOn转成字符串:
 		var jsonObj = JSON.parse(jsonStr);
 		
 		var value = "";

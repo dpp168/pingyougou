@@ -1,5 +1,5 @@
  //控制层 
-app.controller('itemCatController' ,function($scope,$controller   ,itemCatService){	
+app.controller('itemCatController' ,function($scope,$controller,typeTemplateService,itemCatService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -30,20 +30,23 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 			}
 		);				
 	}
-	
+
+	//定义父id
+	$scope.pid = 0;
 	//保存 
 	$scope.save=function(){				
 		var serviceObject;//服务层对象  				
 		if($scope.entity.id!=null){//如果有ID
 			serviceObject=itemCatService.update( $scope.entity ); //修改  
 		}else{
+			$scope.entity.parentId=$scope.pid;
 			serviceObject=itemCatService.add( $scope.entity  );//增加 
 		}				
 		serviceObject.success(
 			function(response){
 				if(response.flag){
 					//重新查询 
-		        	$scope.reloadList();//重新加载
+                    $scope.findByParentId($scope.pid);
 				}else{
 					alert(response.message);
 				}
@@ -92,25 +95,33 @@ app.controller('itemCatController' ,function($scope,$controller   ,itemCatServic
 	}
 	
 	$scope.selectList = function(p_entity){
-		
 		if($scope.grade == 1){
 			$scope.entity_1 = null;
 			$scope.entity_2 = null;
+			$scope.pid = 0;
 		}
 		if($scope.grade == 2){
 			$scope.entity_1 = p_entity;
 			$scope.entity_2 = null;
+			$scope.pid=p_entity.id;
 		}
 		if($scope.grade == 3){
 			$scope.entity_2 = p_entity;
+            $scope.pid=p_entity.id;
 		}
 		
 		$scope.findByParentId(p_entity.id);
+
 	}
 	
 	
 	
-	
+	//新增商品类型时显示下拉框显示模板类型
+	$scope.findTemplates=function () {
+		typeTemplateService.findAll().success(function (response) {
+				$scope.listTemp=response;
+        })
+    }
 	
 	
 	

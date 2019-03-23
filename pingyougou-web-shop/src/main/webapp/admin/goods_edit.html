@@ -85,7 +85,7 @@
 		                              			<td>
 		                           	  				<select class="form-control select-sm" ng-model="entity.goods.category3Id" ng-options="item.id as item.name for item in itemCat3List"></select>
 		                              			</td>
-		                              			<td>
+		                              			<td >
 		                           	  				模板ID:{{entity.goods.typeTemplateId}}
 		                              			</td>
 		                           	  		</tr>
@@ -136,7 +136,9 @@
                                     
                                 </div>
                             </div>
-                            
+
+
+
                             <!--图片上传-->
                             <div class="tab-pane" id="pic_upload">
                                 <div class="row data-type">                                  
@@ -222,6 +224,7 @@
 						                    <tbody>
 						                      <tr ng-repeat="pojo in entity.itemList">					                           
 										            <td ng-repeat="item in entity.goodsDesc.specificationItems">
+														<!--TODO ???|-->
 										            	{{pojo.spec[item.attributeName]}}
 										            </td>
 										            <td>

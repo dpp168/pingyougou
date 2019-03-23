@@ -3,6 +3,9 @@ package cn.itcast.core.service.typeTemplate;
 import cn.itcast.core.pojo.template.TypeTemplate;
 import cn.itcast.utilsBean.PageInfo;
 
+import java.util.List;
+import java.util.Map;
+
 public interface TypeTemplateService {
 
     /**
@@ -39,4 +42,16 @@ public interface TypeTemplateService {
      */
     void delete(Long[] id);
 
+    /**
+     * 新增规格时查询所有模板id
+     * @return
+     */
+    List<TypeTemplate> findAll();
+
+    /**
+     *  根据模板id查询 规格列表
+     * @param id
+     * @return
+     */
+    List<Map> findBySpecList(Long id);
 }
